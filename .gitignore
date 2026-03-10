@@ -1,0 +1,5 @@
+.env
+*.zip
+*-slack_export/
+__pycache__/
+*.pyc
