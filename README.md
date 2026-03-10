@@ -52,18 +52,39 @@ pip install -r requirements.txt
 
 ### 2. Get your Slack credentials
 
-You need two things from your browser:
+You need **two things** from your browser — a **token** and a **cookie**. Both are grabbed from the same place.
+
+> Make sure you're logged into your Slack workspace in the browser (e.g. `yourworkspace.slack.com`), NOT the desktop app.
 
 #### Token (`xoxc-...`)
-1. Open your Slack workspace in the browser (e.g. `yourworkspace.slack.com`)
-2. Press **F12** → go to **Network** tab
-3. Click around in Slack (open any channel)
-4. Find any request to `api.slack.com` (like `conversations.list`)
-5. In the **Payload** tab, copy the `token` value — it starts with `xoxc-`
+
+1. Open your Slack workspace in **Chrome/Edge/Firefox**
+2. Press **F12** to open Developer Tools
+3. Go to the **Network** tab
+4. In the filter bar at the top, type `api` to filter requests
+5. Now click around in Slack — open any channel, send a message, do anything
+6. You'll see API requests appear (like `conversations.history`, `chat.postMessage`, etc.)
+7. Click on any one of those requests
+8. Go to the **Payload** tab (Chrome) or **Request** tab (Firefox)
+9. Look for `token` in the form data — it looks like:
+   ```
+   token: xoxc-754203323143-8551802506338-...
+   ```
+10. Copy the **entire token value** starting with `xoxc-`
 
 #### Cookie (`xoxd-...`)
-1. Same F12 → **Application** tab → **Cookies** → `https://app.slack.com`
-2. Find the cookie named **`d`** — its value starts with `xoxd-`
+
+1. Still in Developer Tools (F12), go to the **Application** tab (Chrome) or **Storage** tab (Firefox)
+2. In the left sidebar, expand **Cookies**
+3. Click on `https://app.slack.com`
+4. In the cookie list, find the one named **`d`**
+5. Double-click the **Value** column to select it — it looks like:
+   ```
+   xoxd-0kl8TF2FPLxBasHSEregYKqd...
+   ```
+6. Copy the **entire value** starting with `xoxd-`
+
+> **Can't find it?** The `d` cookie might be URL-encoded (contains `%2F`, `%2B`, etc.) — that's fine, copy it as-is.
 
 ### 3. Create `.env` file
 
